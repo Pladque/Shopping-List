@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block contentListSearch %}
+
+    {% for list in lists %}
+        <div class="collection" style = "width: 500px; margin-left:auto; margin-right:auto;" >
+            <a class="collection-item" style="margin-left:auto; margin-right:auto; padding-bottom: 35px;"  href="/ListDetails/{{list.id}}">
+                <span class="badge">
+                    {{list.owner}}
+                    <form action = "{%url 'asking'  list.id %}" method = "POST">
+                        {% csrf_token%}
+                        <input type="hidden" name="back" value = "{{request.path}}">
+                        <button class="waves-effect waves-light btn-small" type='submit' > Ask for share</button>
+                    </form>
+
+                </span>
+                <h5>{{list.list_name}}  </h5>
+                </a>
+
+        </div>
+
+    {%endfor%}
+	
+
+	
+	
+
+
+{% endblock %}

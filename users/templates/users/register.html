@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class = "container" style = "padding:20px"></div>
+<h2 align="center" style="color:#e6676c;"> REGISTER</h2>
+<br>
+<br>
+<div class = "container  " >
+    <form method= "POST">
+        {% csrf_token%}
+        <fieldset class="form-group" style="background-color:#e3e3e3;">
+            <legend class="border-bottom mb-4">Join Today</legend>
+            {{form|crispy}}
+        </fieldset>
+        <div>
+            <button type = "submit"> Sign up!</button>
+        </div>
+
+        <div>
+            <small> Already have an account?
+            <a href="/login" >Log in!</a>
+            </small>
+        </div>
+    </form>
+
+</div>
+
+<div class = "container" style = "padding:60px"></div>
+
+{% endblock %}

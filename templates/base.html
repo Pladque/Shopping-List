@@ -1,0 +1,126 @@
+{% load static %}
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Home shopping list</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<style>
+::placeholder { /* Firefox, Chrome, Opera */
+    color:#e6676c;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:#e6676c;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color:#e6676c;
+}
+</style>
+
+<body style="background-color:#fae3d9;">
+
+    <div class="navbar-fixed" >
+    <nav class="nav-extended">
+      <div class="nav-wrapper" style="background-color:#fa898e; ">
+        <div class = "container " >
+            <a href="/" class="brand-logo">ShoppingList</a>
+            {%if  request.path  != "/mobilenav/" %}
+			<a href="/mobilenav" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            {%elif  request.path  == "/mobilenav/" %}
+            <a href="/" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            {%endif%}
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+					  <li><a href="/list/search">Search for list </a></li>
+						{% if user.is_authenticated %}
+                            <li><a href="/myLists">MyLists</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="/asks">Asks</a></li>
+                            <li><a href="/logout">Log out</a></li>
+						{% else %}
+                            <li><a href="/login">Log in</a></li>
+                            <li><a href="/register">Register</a></li>
+						{% endif %}
+
+                    </ul>
+        </div>
+        </div>
+
+    {% block mobile_nav %}
+      {% endblock mobile_nav %}
+    </nav>
+  </div>
+
+
+  <div class = "container " >
+
+
+
+      <br>
+
+      <div class="card-panel " style="background-color:#bbded6; min-height: 200px;">
+
+            {% block content %}
+            {% endblock content %}
+
+            {%if    request.path  == "/list/search/"  or request.path  == "/" or request.path  == "/logout/" or request.path  == "/mobilenav/"  or  request.path  == "/logout/"  %}
+              <div class = "row" align="center" style="padding-top:70px;    padding-bottom: 30px">
+                  <div class = "col s4">
+                           <i class="large material-icons" style="color: #EE6E73">shopping_cart</i>
+                            <h5> Online shopping list!</h5>
+                      </div>
+                  <div class = "col s4">
+                      <i class="large material-icons" style="color: #EE6E73">add_shopping_cart</i>
+                        <h5>Anyone can add anything at any time! </h5>
+                  </div>
+                  <div class = "col s4">
+                      <i class="large material-icons" style="color: #EE6E73">attach_money</i>
+                        <h5> For free!</h5>
+                  </div>
+              </div>
+
+          <div class = "container" >
+                        <form  method = "post" action = "{%url 'list/search/' %}">
+                            {% csrf_token%}
+                                <input type = "text" name = "search" placeholder = "Type list name..." style="background-color:white; ">
+                                <div class="right-align">
+                                        <button class="btn waves-effect waves-light" type="submit" name="action"  style = "background-color:grey; ">Submit
+                                            <i class="material-icons right">search</i>
+                                        </button>
+                                </div>
+
+                        </form>
+                </div>
+
+
+            {%endif%}
+
+                {% block contentListSearch %}
+                {% endblock contentListSearch %}
+
+        <div class = "container" style = "padding:100px"></div>
+    </div>
+
+
+  </div>
+</div>
+
+        <footer class="page-footer" style="background-color: #3b8786; position: relative; clear:both; margin-top: 300px; height:20%">
+          <div class="footer-copyright">
+            <div class="container">
+                2020 Pladq
+            </div>
+          </div>
+        </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

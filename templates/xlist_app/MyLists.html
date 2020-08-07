@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 align="center" style="color:#e6676c;"> Your Lists:</h1>
+    <br>
+    <div class="container">
+      <a class="btn-floating btn-large waves-effect waves-light red" href = "/NewList"><i class="material-icons">add</i>   </a>
+
+            {% for list in my_lists %}
+            <div class="collection" style="background-color:#d5eaf5; ">
+                <a   style="margin-left:auto; margin-right:auto; background-color:black; "      href="/ListDetails/{{list.id}}">
+                    <h5 >    {{list.list_name}}  </h5>
+                    <span class="badge">
+                        <form action="{%url 'deleteList'  list.id %}" method="POST">
+                                {% csrf_token%}
+                                <div >
+                                    <button class="waves-effect waves-light btn-small" type='submit' > Delete</button>
+                                 </div>
+                                <input type="hidden" name="back" value = "{{request.path}}">
+                        </form>
+                    </span>
+                </a>
+
+            <div  align="left"    style="background-color:#ffffff; ">
+                <form  action="{%url 'shareList'  list.id %}" method="POST" >
+                    {% csrf_token%}
+                    <input type="hidden" name="back" value = "{{request.path}}">
+                    <input  name="share"placeholder="Enter YOUR GROUP NAME, ID or nickname">
+                    <div align="left"   style = "width: 50px;">
+                        <button class="btn-small" type='submit' > Share</button></span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+          {%endfor%}
+    </div>
+</div>
+
+</br>
+
+<div class="card-panel " style="background-color:#bbded6; min-height: 200px;">
+
+    <h1 align="center" style="color:#e6676c;"> Other Lists:</h1>
+    <br>
+    <div class="container">
+        {% for list in other_lists %}
+        <div class="collection"     style="background-color:#d5eaf5; padding:2px;"  >
+
+            <a class="collection-item" style="margin-left:auto; margin-right:auto; "  href="/ListDetails/{{list.id}}">
+                {{list.list_name}}
+                <span class="badge">
+                    <form action="{%url 'deleteNOTMYList'  list.id %}" method="POST">
+                        {% csrf_token%}
+                            <button class="waves-effect waves-light btn-small" type='submit' > Delete for you</button>
+                        <input type="hidden" name="back" value = "{{request.path}}">
+                    </form>
+                </span>
+
+            </a>
+
+              <input type="hidden" name="back" value = "{{request.path}}">
+
+        </div>
+        {%endfor%}
+
+
+
+    </div>
+
+{% endblock %}

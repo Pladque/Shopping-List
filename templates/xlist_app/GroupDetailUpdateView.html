@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {%if  request.path  == "/NewGroup/"  %}
+        <h1 align="center" style="color:#e6676c;"> New Group: </h1>
+    {%else%}
+        <h1 align="center"style="color:#e6676c;">Participants: </h1>
+    {%endif%}
+<br>
+
+<div class = "container">
+  <form action="" method="POST">
+    {% csrf_token%}
+        <div class="center-align" style="background-color: #e3e3e3;   color: white;">
+            {{form|crispy}}
+        </div>
+            <button class="waves-effect waves-light btn-small" type='submit' > Add</button>
+  </form>
+</div>
+
+
+{% endblock %}

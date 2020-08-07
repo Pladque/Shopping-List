@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+TO NIE DZIALA I TAK
+<h1 align="center"> New List Name </h1>
+<br>
+
+  <form action="" method="POST">
+    {% csrf_token%}
+        <div class="center-align">
+            {{form.as_p}}
+            <input type = "submit" value = "Save">
+        </div>
+  </form>
+
+
+{% endblock %}

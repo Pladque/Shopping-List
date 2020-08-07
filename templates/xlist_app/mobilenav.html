@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block mobile_nav %}
+
+					  <li><a href="/list/search">Search for list </a></li>
+						{% if user.is_authenticated %}
+						  	<li><a href="/myLists">MyLists</a></li>
+							<li><a href="/profile">Profile</a></li>
+							<li><a href="/asks">asks</a></li>
+							<li><a href="/logout">Log out</a></li>
+						{% else %}
+							<li><a href="/login">Log in</a></li>
+							<li><a href="/register">Register</a></li>
+						{% endif %}
+
+{% endblock %}

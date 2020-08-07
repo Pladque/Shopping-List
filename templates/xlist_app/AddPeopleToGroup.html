@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 align="center"> New Group: </h1>
+<br>
+<form  method = "post" action = "{%url 'groupdetailupdate'  group.id %}">
+    {% csrf_token%}
+    <input type = "text" name = "add" placeholder = "Type ID or NICKNAME" style="background-color:white; ">
+    <div class="right-align">
+            <button class="btn waves-effect waves-light" type="submit" name="action"  style = "background-color:grey; ">Submit
+            </button>
+    </div>
+</form>
+
+{% for p in participants %}
+
+        <div align = "center" style=" margin-left:auto; margin-right:auto; background-color:#d5eaf5;   width: 35%; min-height:40px; padding-top:10px; padding-bottom:10px"   >
+                <a    style="margin-left:auto; margin-right:auto; margin-top:auto; margin-bottom:auto;"      href="/GroupDetails/{{group.id}}">
+                    <h5 >    {{p.username}}  </h5>
+                </a>
+         </div>
+         <form align = "center" action="{%url 'deleteUserFromGroup'  p.id %}" method="POST"  style="padding-top:5px; padding-bottom:15px; margin-left:auto; margin-right:auto; " >
+             {% csrf_token%}
+                <button class="waves-effect waves-light btn-small" type='submit' > Delete</button>
+                <input type="hidden" name="back" value = "{{request.path}}">
+         </form>
+
+{%endfor%}
+
+
+{% endblock %}
+<div class="container">
+    {%if  request.path  != "/NewGroup/"  %}
+                {% for p in participants %}
+
+                {%endfor%}
+    {%endif%}
+</div>

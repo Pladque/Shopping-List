@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 align="center" style="color:#e6676c; ">Asks:</h1>
+    <br>
+    <div class="container" style = "   min-height: 300px;">
+        {% for ask in asks %}
+        <div class="collection" style="background-color:#d5eaf5; padding-bottom: 40px;padding-top: 30px;padding-left: 10px;padding-right: 10px;">
+            <a   align="left" style="margin-left:auto; margin-right:auto; " >
+			<span class="badge">
+			<form     action="{%url 'agreeAsk'  ask.id %}" method="POST">
+                {% csrf_token%}
+                <div >
+                    <button class="waves-effect waves-light btn-small" type='submit' > Agree</button>
+                 </div>
+                <input type="hidden" name="back" value = "{{request.path}}">
+            </form>
+
+            <form     action="{%url 'deleteAsk'  ask.id %}" method="POST">
+                {% csrf_token%}
+                <div >
+                    <button class="waves-effect waves-light btn-small" type='submit' > Delete</button>
+                 </div>
+                <input type="hidden" name="back" value = "{{request.path}}">
+            </form>
+
+			</span>
+                <h5>{{ask.who_asked}}	is asking for access to your list: {{ask.what_list}}</h5>
+            </a>
+
+
+        </div>
+
+        {%endfor%}
+    </div>
+    </div>
+
+{% endblock %}

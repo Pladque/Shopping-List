@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id = "info-container" style=" margin-left:auto; margin-right:auto; width: 300px;  color:#e6676c;">
+    <h3  align = "center"> Your profile</h3>
+    <br>
+    <div id = "personal-info" style=" color:#e6676c; font-size:20px;" align = "center">
+        NAME:     {{ nickname }}      </br>
+        ID:          {{ id }}         </br>
+    </div>
+</div>
+
+</div>
+
+<br>
+<br>
+
+<div class="card-panel " style="background-color:#bbded6; min-height: 200px;">
+    <div id="allgroups" align = "center">
+    <div id="groups">
+                          <h2 style="color:#e6676c;">Groups</h2>
+         <a class="btn-floating btn-large waves-effect waves-light red" href = "/NewGroup"><i class="material-icons">add</i>   </a>
+    </div>
+    </br>
+
+    {%for group in groups%}
+         <div align = "center" style="background-color:#d5eaf5;   width: 35%; min-height:40px; padding-top:10px; padding-bottom:10px"   >
+                <a    style="margin-left:auto; margin-right:auto; margin-top:auto; margin-bottom:auto;"      href="/GroupDetails/{{group.id}}">
+                    <h5 >    {{group.name}}  </h5>
+                </a>
+             </div>
+             <form     action="{%url 'deleteGroup'  group.id %}" method="POST"  style="padding-top:5px; padding-bottom:15px" >
+                    {% csrf_token%}
+                    <div >
+                        <button class="waves-effect waves-light btn-small" type='submit' > Delete</button>
+                     </div>
+                    <input type="hidden" name="back" value = "{{request.path}}">
+             </form>
+
+    {%endfor%}
+
+    {%for group in other_groups%}
+         <div style="background-color:#d5eaf5;   width: 40%"    >
+                <a   style="margin-left:auto; margin-right:auto; "      href="/GroupDetails/{{group.id}}">
+                    <h5 >    {{group.name}}  </h5>
+                </a>
+             <form     action="{%url 'deleteNOTMYGroup'  group.id %}" method="POST">
+                    {% csrf_token%}
+                    <div >
+                        <button class="waves-effect waves-light btn-small" type='submit' > Delete for you</button>
+                     </div>
+                    <input type="hidden" name="back" value = "{{request.path}}">
+             </form>
+         </div>
+    </div>
+</div>
+
+
+{%endfor%}
+
+{% endblock %}
