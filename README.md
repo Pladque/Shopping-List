@@ -1,4 +1,4 @@
-# Shpping-List-
+# Shopping-List-
 You can check it on: http://shoppinglistbypladq.herokuapp.com/
 
 What I've learned:
