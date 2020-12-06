@@ -1,10 +1,10 @@
 # Shopping-List-
-You can check it on: http://shoppinglistbypladq.herokuapp.com/
+You can check it here: http://shoppinglistbypladq.herokuapp.com/
 
 What I've learned:
 
--how to implement Relational databeses in django
+-how to implement relational databases in django
 
--Using existing css libraries
+-Using css libraries
 
 -Creating login/register view
